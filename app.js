@@ -1,40 +1,17 @@
 const express = require('express');
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send(`
-  <!DOCTYPE html>
-    <html lang="ko">
-      <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-      </head>
-      <body>
-        여기는 루트!
-      </body>
-    </html>`);
-});
+const PORT = 3000;
 
-app.get('/login', (req, res) => {
-  res.send(`
-  <!DOCTYPE html>
-    <html lang="ko">
-      <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-      </head>
-      <body>
-        <input type="text" placeholder="아이디"  /><br />
-        <input type="text" placeholder="비밀번호"  /><br />
-        <button>로그인</button>
-      </body>
-    </html>`);
-});
+// 라우팅
+const home = require('./routes/home');
 
-app.listen(3000, () => {
+// 앱 세팅
+app.set('views', './views');
+app.set('view engine', 'ejs');
+
+app.use('/', home); // use -> 미들 웨어를 등록해주는 메소드.
+
+app.listen(PORT, () => {
   console.log('서버 가동');
 });
